@@ -1,21 +1,16 @@
-## Put comments here that give an overall description of what your
-## functions do
+#creates functions and allows user to put them in a list to be called later
 
-## Write a short comment describing this function
-
-makeCacheMatrix <- function(x = matrix()) {
-  function(x = matrix()) {
+makeCachedMatrix <- function(x = matrix()) {
+  cacheMakeMatrix <- function(x = matrix()) {
     m <- NULL # creates cache
     set <- function(y) {
       x <<- y
       m <<- NULL   #function used to set new input and reset cache for result of 
       # the new input
     }
-    get <- function() x #function that provides new input to be used by 
-    # leaving x out of get environment returns parent environment
+    get <- function() x # gives user the current input and allows for use of it
     
-    setmatrix <- function(mtrx) m <<- mtrx #function that caches output from 
-    #cacheSolve
+    setmatrix <- function(mtrx) m <<- mtrx #function that caches output from cacheSolve
     
     getmatrix <- function() m   # finds value for m 
     list(set = set, get = get,
@@ -26,7 +21,7 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-# takes listed makeCachedMatrix and uses it's funct's to provide a result
+# takes listed makecachedMatrix and uses it's funct's to provide a result
 
 cacheSolve <- function(x, ...) { 
     m <- x$getmatrix()
@@ -35,8 +30,8 @@ cacheSolve <- function(x, ...) {
       return(m)
     }
     data <- x$get()
-    m <- solve(data,...)  #using function to get provided input and make output
+    m <- solve(data,...)  #uses $get function to get provided input and stores result
     x$setmatrix(m)
     m
-} # Returns the inverse matrix of the inputted matrix 
+} # in this case returns the inverse matrix of the inputted matrix 
 
